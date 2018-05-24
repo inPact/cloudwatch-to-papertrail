@@ -47,3 +47,14 @@ $ APP=helium PROGRAM=lambda WAIT_FOR_FLUSH=true make deploy
 ```
 
 Logs will be sent immediately to papertrail, at the expense of longer lambda execution times.
+
+
+example for env.json  
+{
+  "appname" : "f-ros-api",
+  "program" : "tabit",
+  "waitForFlush" :true,
+  "host" :"logs3.papertrailapp.com",
+  "port" : "26199",
+  "datadog" : ""
+}

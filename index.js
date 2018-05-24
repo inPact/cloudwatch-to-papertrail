@@ -71,18 +71,19 @@ exports.handler = function (event, context, cb) {
       transports: []
     });
 
+    var data = JSON.parse(result.toString('utf8'));
+
     log.add(papertrailTransport, {
-      host: config.host,
-      port: config.port,
-      program: config.program,
-      hostname: config.appname,
-      flushOnClose: true,
-      logFormat: function (level, message) {
-        return message;
-      }
+        host: config.host,
+        port: config.port,
+        program: data.logGroup,
+        hostname: data.logStream.split('-').pop(-1),
+        flushOnClose: true,
+        logFormat: function (level, message) {
+            return message;
+        }
     });
 
-    var data = JSON.parse(result.toString('utf8'));
 
     var metricRegex = /^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z)\ -\ info:\ ([a-z]+):.*?(metric#.*)+$/;
     var reportRegex = /^REPORT\ RequestId.*Billed\ Duration:\ ([0-9]+)\ ms.*Used:\ ([0-9]+)\ MB$/;
