@@ -1,11 +1,11 @@
 var zlib = require('zlib');
 var winston = require('winston');
 var papertrailTransport = require('winston-papertrail').Papertrail;
-var dogapi = require('dogapi');
+//var dogapi = require('dogapi');
 var config = require('./env.json');
 
 function addLambdaMetrics(data, match) {
-  var now = dogapi.now();
+  //var now = dogapi.now();
 
   data.push({
     metric: 'aws.lambda.billed',
@@ -63,9 +63,11 @@ exports.handler = function (event, context, cb) {
       return cb(err);
     }
 
+/*
     dogapi.initialize({
       api_key: config.datadog
     });
+*/
 
     var log = new (winston.Logger)({
       transports: []
@@ -114,11 +116,11 @@ exports.handler = function (event, context, cb) {
       return cb();
     }
 
-    dogapi.metric.send_all(metricPoints, function () {
+    /*dogapi.metric.send_all(metricPoints, function () {
       dogapi.metric.send_all(reportPoints, function () {
         log.close();
         cb();
       });
-    });
+    });*/
   });
 };
