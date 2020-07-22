@@ -79,7 +79,7 @@ exports.handler = function (event, context, cb) {
         host: config.host,
         port: config.port,
         program: data.logGroup,
-        hostname: data.logStream.split('-').pop(-1),
+        hostname: data.logStream.substr(-12),
         flushOnClose: true,
         logFormat: function (level, message) {
             return message;
