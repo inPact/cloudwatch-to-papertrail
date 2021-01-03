@@ -1,5 +1,5 @@
 {
-  "name": "cloudwatch-to-papertrail",
+  "name": "cloudwatch-to-papertrail-2",
   "version": "1.0.0",
   "description": "Lambda to send cloudwatch logs to papertrail",
   "main": "index.js",
