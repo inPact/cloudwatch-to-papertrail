@@ -138,11 +138,17 @@ exports.handler = function (event, context, cb) {
     data.logEvents.forEach(function (line) {
 
       var obj = JSON.parse(line.message)
-
       //if ( obj.kubernetes.container_name == 'k8-internus' || obj.kubernetes.container_name == 'ros-api-dev'){
-      // if ( obj.kubernetes.container_image.startsWith('075139435924.dkr.ecr.eu-west-1.amazonaws.com')){
-      log.info( obj.log);
-      // }
+      if ( obj.kubernetes == undefined ) {
+        //fargate logs
+        log.info( obj.log.substr(40) );
+      }
+      else {
+        //ordinary logs
+        if ( obj.kubernetes.container_image.startsWith('075139435924.dkr.ecr.eu-west-1.amazonaws.com')){
+          log.info( obj.log);
+        }
+      }
 
       if (config.datadog !== '') {
       //  var metricMatch = line.log.trim().match(metricRegex);
