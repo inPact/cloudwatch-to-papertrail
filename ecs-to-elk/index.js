@@ -16,10 +16,10 @@ function sendData(data) {
       index: ELK_INDEX
       body: {
         ['@timestamp']: (new Date()).toISOString(),
-        message: line.message
+        message: line.message,
+        container: data.logStream.substr(-12),
+        service: data.logGroup
       },
-      container: data.logStream.substr(-12),
-      service: data.logGroup
     });
   });
 }
