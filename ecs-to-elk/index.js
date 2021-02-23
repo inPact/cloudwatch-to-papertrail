@@ -13,7 +13,7 @@ this.client = new Client({
 function sendData(data) {
   data.logEvents.forEach(function (line) {
     client.index({
-      index: config.index;
+      index: config.index,
       body: {
         ['@timestamp']: (new Date()).toISOString(),
         message: line.message,
