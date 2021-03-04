@@ -2,7 +2,7 @@ const { Client } = require('@elastic/elasticsearch');
 var zlib = require('zlib');
 var config = require('./env.json');
 
-this.client = new Client({
+const client = new Client({
   node: config.host,
   auth: {
     username: config.user,
@@ -24,13 +24,22 @@ function sendData(data) {
   });
 }
 
+
+
+
 exports.handler = function (event, context, cb) {
-  context.callbackWaitsForEmptyEventLoop = config.waitForFlush;
+  handler(context, event, cb);
+};
+
+function handler(context, event, cb) {
+  // context.callbackWaitsForEmptyEventLoop = config.waitForFlush;
 
   const payload = new Buffer(event.awslogs.data, 'base64');
 
   zlib.gunzip(payload, function (err, result) {
-    if (err) { return cb(err);}
+    // if (err) {return cb(err);}
     sendData(JSON.parse(result.toString('utf8')));
   });
-};
+}
+
+handler(1, packet, 2)
