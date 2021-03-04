@@ -24,22 +24,19 @@ function sendData(data) {
   });
 }
 
-
-
-
 exports.handler = function (event, context, cb) {
   handler(context, event, cb);
 };
 
 function handler(context, event, cb) {
-  // context.callbackWaitsForEmptyEventLoop = config.waitForFlush;
+  context.callbackWaitsForEmptyEventLoop = config.waitForFlush;
 
   const payload = new Buffer(event.awslogs.data, 'base64');
 
   zlib.gunzip(payload, function (err, result) {
-    // if (err) {return cb(err);}
+    if (err) {return cb(err);}
     sendData(JSON.parse(result.toString('utf8')));
   });
 }
 
-handler(1, packet, 2)
+
