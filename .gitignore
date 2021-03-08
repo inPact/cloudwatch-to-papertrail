@@ -40,3 +40,5 @@ jspm_packages
 code.zip
 env.json
 .idea
+/ecs-to-elk/ecs-to-elk.zip
+.gitignore
