@@ -42,3 +42,5 @@ env.json
 .idea
 /ecs-to-elk/ecs-to-elk.zip
 .gitignore
+/pt+elk/pt+elk.zip
+/pt+elk/test.js

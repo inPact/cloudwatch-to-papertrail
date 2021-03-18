@@ -1,9 +1,17 @@
 const { Client } = require('@elastic/elasticsearch');
+const stripAnsi = require('strip-ansi');
 let zlib = require('zlib');
 let winston = require('winston');
 let papertrailTransport = require('winston-papertrail').Papertrail;
 let config = require('./env.json');
 
+const client = new Client({
+  node: config.elkHost,
+  auth: {
+    username: config.elkUser,
+    password: config.elkPassword,
+  },
+});
 
 function sendToPT(data) {
   let log = new (winston.Logger)({
@@ -29,10 +37,10 @@ function sendToPT(data) {
 function sendToELK(data) {
   data.logEvents.forEach(function (line) {
     client.index({
-      index: config.index,
+      index: config.elkIndex,
       body: {
         ['@timestamp']: (new Date()).toISOString(),
-        message: line.message,
+        message: stripAnsi(line.message),
         container: data.logStream.substr(-12),
         service: data.logGroup
       },
@@ -56,7 +64,3 @@ exports.handler = function (event, context, cb) {
     process(data);
   });
 };
-
-
-
-
