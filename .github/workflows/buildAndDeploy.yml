@@ -23,7 +23,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: cd ecs
-    - run: npm ci
     - run: npm run build --if-present
     - run: zip -r /out/deployment.zip .
     - name: default deploy
