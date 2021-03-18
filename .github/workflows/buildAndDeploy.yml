@@ -8,9 +8,10 @@ on:
     branches: [ master ]
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: scripts
     strategy:
       matrix:
         node-version: [10.x]
@@ -22,7 +23,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - working-dirctory: ecs
     - run: npm run build --if-present
     - run: zip -r /out/deployment.zip .
     - name: default deploy
