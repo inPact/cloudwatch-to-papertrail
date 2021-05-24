@@ -1,0 +1,19 @@
+{
+  "name": "lambda-newrelic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@newrelic/winston-enricher": "^1.0.0"
+  },
+  "dependencies": {
+    "newrelic": "^7.2.0",
+    "newrelic-winston": "^2.1.0",
+    "winston": "^3.3.3"
+  }
+}
