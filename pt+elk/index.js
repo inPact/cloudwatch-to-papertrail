@@ -14,15 +14,13 @@ const client = new Client({
 });
 
 function sendToPT(data) {
-  let log = new (winston.Logger)({
-    transports: []
-  });
+  let log = new winston.Logger();
 
   log.add(papertrailTransport, {
-    host: config.ptHost,
-    port: config.ptPort,
-    program: data.logGroup,
-    hostname: data.logStream.substr(-12),
+    host: config.pt_host,
+    port: config.port,
+    program: "Roy",
+    hostname: "Roy",
     flushOnClose: true,
     logFormat: function (level, message) {
       return message;
